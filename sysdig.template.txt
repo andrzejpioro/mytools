@@ -1,0 +1,29 @@
+**Sysdig Alert Triggered! 🚨**
+
+**Alert Name:** {{alert.name}}
+**Severity:** {{alert.severity}}
+**Scope:** {{scope}}
+**Timestamp:** {{event.timestamp}}
+**Description:** {{alert.description}}
+
+### 🔍 **Kubernetes Object Details:**
+{% for entity in alert.triggeringEntities %}
+- **Namespace:** {{ entity.kubernetes.namespace }}
+- **Pod Name:** {{ entity.kubernetes.pod }}
+- **Container:** {{ entity.kubernetes.container }}
+- **Node:** {{ entity.kubernetes.node }}
+{% endfor %}
+
+### 📌 **Event Details:**
+{% for event in events %}
+- **Timestamp:** {{ event.timestamp }}
+- **Event Type:** {{ event.type }}
+- **Details:** {{ event.details }}
+{% endfor %}
+
+### 🏷️ **Labels & Annotations:**
+{% for label in alert.labels %}
+- **{{ label.name }}**: {{ label.value }}
+{% endfor %}
+
+🔗 **View in Sysdig:** [{{alert.url}}]({{alert.url}})
